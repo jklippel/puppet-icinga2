@@ -136,6 +136,13 @@ class icinga2::params {
           #Specify '--no-install-recommends' so we don't inadvertently get Nagios 3 installed; it comes as a recommended package with most of the plugin packages:
           $server_plugin_package_install_options = '--no-install-recommends'
         }
+        '8': {
+          $icinga2_server_package = 'icinga2'
+          $icinga2_server_plugin_packages = ['nagios-plugins', 'nagios-plugins-basic', 'nagios-plugins-standard', 'nagios-snmp-plugins', 'nagios-plugins-contrib', 'nagios-nrpe-plugin']
+          $icinga2_server_mail_package = 'mailutils'
+          #Specify '--no-install-recommends' so we don't inadvertently get Nagios 3 installed; it comes as a recommended package with most of the plugin packages:
+          $server_plugin_package_install_options = '--no-install-recommends'
+        }
         #Fail if we're on any other Debian release:
         default: { fail("${::operatingsystemmajrelease} is not a supported Debian release version!") }
       }
@@ -286,6 +293,9 @@ class icinga2::params {
         '7': {
           $icinga2_server_service_name = 'icinga2'
         }
+        '8': {
+          $icinga2_server_service_name = 'icinga2'
+        }
         #Fail if we're on any other Debian release:
         default: { fail("${::operatingsystemmajrelease} is not a supported Debian release version!") }
       }
@@ -401,6 +411,11 @@ class icinga2::params {
     'Debian': {
       case $::operatingsystemmajrelease {
         '7': {
+          $icinga2_client_packages = ['nagios-nrpe-server', 'nagios-plugins', 'nagios-plugins-basic', 'nagios-plugins-standard', 'nagios-snmp-plugins', 'nagios-plugins-contrib', 'nagios-nrpe-plugin']
+          #Specify '--no-install-recommends' so we don't inadvertently get Nagios 3 installed; it comes as a recommended package with most of the plugin packages:
+          $client_plugin_package_install_options = '--no-install-recommends'
+        }
+        '8': {
           $icinga2_client_packages = ['nagios-nrpe-server', 'nagios-plugins', 'nagios-plugins-basic', 'nagios-plugins-standard', 'nagios-snmp-plugins', 'nagios-plugins-contrib', 'nagios-nrpe-plugin']
           #Specify '--no-install-recommends' so we don't inadvertently get Nagios 3 installed; it comes as a recommended package with most of the plugin packages:
           $client_plugin_package_install_options = '--no-install-recommends'

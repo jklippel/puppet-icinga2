@@ -36,7 +36,7 @@ define icinga2::object::checkcommand (
   validate_string($object_checkcommandname)
   if $checkcommand_template == 'object_checkcommand.conf.erb' {
     validate_string($template_to_import)
-    validate_array($command)
+    #validate_array($command)
     validate_string($cmd_path)
     if $env {
       validate_hash($env)
