@@ -61,12 +61,15 @@ class icinga2::server::install::repos inherits icinga2::server {
         if $use_debmon_repo == false {
           include apt::backports
         } else {
+
+          # use packages.icinga.com as debmon has been shut down
+          #
           apt::source { 'debmon':
-            location    => 'http://debmon.org/debmon',
-            release     => "debmon-${lsbdistcodename}",
+            location    => 'http://packages.icinga.com/debian',
+            release     => "icinga-${lsbdistcodename}",
             repos       => 'main',
-            key_source  => 'http://debmon.org/debmon/repo.key',
-            key         => '29D662D2',
+            key_source  => 'https://packages.icinga.com/icinga.key',
+            key         => '34410682',
             include_src => false,
             # backports repo use 200
             pin         => '300'
